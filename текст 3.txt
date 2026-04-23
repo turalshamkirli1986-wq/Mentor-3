@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+  <meta charset="UTF-8">
+  <title>Mentor AI</title>
+  <style>
+    body { font-family: Arial; background: linear-gradient(135deg,#6a11cb,#2575fc); color:#fff; text-align:center; }
+    .card { background:rgba(255,255,255,0.1); border-radius:12px; padding:20px; margin:20px auto; width:80%; }
+    input, select, button { padding:10px; margin:10px; border-radius:8px; border:none; }
+    button { background:#ffcc00; color:#000; font-weight:bold; cursor:pointer; }
+    #quote,#advice,#mentorQuotes { margin-top:15px; font-size:18px; background:rgba(0,0,0,0.3); padding:15px; border-radius:8px; white-space:pre-line; }
+  </style>
+</head>
+<body>
+  <h1>✨ Mentor AI ✨</h1>
+  <p>Statik versiya – GitHub Pages üçün</p>
+
+  <div class="card">
+    <h2>📌 Mövzu seç</h2>
+    <select id="topic">
+      <option value="Uğur">🏆 Uğur</option>
+      <option value="Sevgi">❤️ Sevgi</option>
+      <option value="Liderlik">👑 Liderlik</option>
+      <option value="Xoşbəxtlik">😊 Xoşbəxtlik</option>
+      <option value="İlham">💡 İlham</option>
+    </select>
+    <br>
+    <button onclick="getQuote()">Motivasiya al</button>
+    <div id="quote"></div>
+  </div>
+
+  <div class="card">
+    <h2>🤖 AI Məsləhətçi</h2>
+    <input type="text" id="question" placeholder="Sualını yaz..." style="width:70%;">
+    <br>
+    <button onclick="getAdvice()">Məsləhət al</button>
+    <div id="advice"></div>
+  </div>
+
+  <div class="card">
+    <h2>🌟 Məşhurların Kəlamları</h2>
+    <input type="text" id="mentorName" placeholder="Məşhurun adını yaz (məs: Steve Jobs)">
+    <br>
+    <button onclick="getMentorQuotes()">Kəlamları göstər</button>
+    <div id="mentorQuotes"></div>
+  </div>
+
+  <script>
+    const quotes = {
+      "Uğur": ["Uğur çalışmaqla gəlir.", "Kiçik addımlar böyük nəticələrə aparır."],
+      "Sevgi": ["Sevgi həyatın gücüdür.", "Sevgi paylaşdıqca böyüyür."],
+      "Liderlik": ["Liderlik nümunə olmaqdır.", "Yaxşı lider komandasını gücləndirir."],
+      "Xoşbəxtlik": ["Xoşbəxtlik paylaşmaqla artır.", "Sadə şeylərdə xoşbəxtlik tap."],
+      "İlham": ["İlham hər yerdədir.", "İlhamı hiss et və yarat."]
+    };
+
+    const mentorQuotesDB = {
+      "steve jobs": [
+        "Stay hungry, stay foolish.",
+        "Your time is limited, so don’t waste it living someone else’s life.",
+        "Design is how it works.",
+        "Great things in business are done by a team.",
+        "Be a yardstick of quality.",
+        "Don’t lose faith.",
+        "Do what you believe is great work.",
+        "You can’t connect the dots looking forward.",
+        "Innovation comes from saying no to 1000 things.",
+        "The crazy ones change the world."
+      ],
+      "elon musk": [
+        "When something is important enough, you do it even if the odds are not in your favor.",
+        "Failure is an option here.",
+        "Persistence is very important."
+      ],
+      "oprah winfrey": [
+        "Turn your wounds into wisdom.",
+        "Live the life of your dreams."
+      ]
+    };
+
+    function getQuote() {
+      const topic = document.getElementById("topic").value;
+      const arr = quotes[topic];
+      const randomQuote = arr[Math.floor(Math.random() * arr.length)];
+      document.getElementById("quote").innerText = randomQuote;
+    }
+
+    function getAdvice() {
+      const question = document.getElementById("question").value.toLowerCase();
+      let advice;
+      if (question.includes("restoran")) {
+        advice = `🍽️ Restoran açmaq üçün plan:
+1. Biznes plan: lokasiya, konsept, rəqabət analizi.
+2. Maliyyə planlama: büdcə, xərclər, ROI.
+3. Menyu və təchizat: təchizatçılar, qiymət strategiyası.
+4. İnsan resursları: işçi seçimi, təlim.
+5. Marketinq: sosial media, promo aksiyalar.
+6. Texnologiya: rezervasiya sistemi, AI menyu tövsiyələri.`;
+      } else {
+        advice = "💡 Məsləhət: Kiçik addımlarla başla, plan qur və davamlı ol.";
+      }
+      document.getElementById("advice").innerText = advice;
+    }
+
+    function getMentorQuotes() {
+      const name = document.getElementById("mentorName").value.toLowerCase();
+      const arr = mentorQuotesDB[name];
+      if (arr) {
+        document.getElementById("mentorQuotes").innerText = arr.join("\n");
+      } else {
+        document.getElementById("mentorQuotes").innerText = "Bu məşhur üçün kəlamlar tapılmadı.";
+      }
+    }
+  </script>
+</body>
+</html>
